@@ -1,0 +1,36 @@
+name: Sync to Notion
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'prompts/**/*.md'
+      - 'sync/*.py'
+  workflow_dispatch:  # Allow manual trigger
+
+jobs:
+  sync-notion:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+      
+      - name: Sync to Notion
+        env:
+          NOTION_API_KEY: ${{ secrets.NOTION_API_KEY }}
+          NOTION_DATABASE_ID: 2bedbdf10e314b638e3fc21d7aa8b373
+        run: python sync/notion-sync.py
+      
+      - name: Notify on failure
+        if: failure()
+        run: echo "::error::Notion sync failed. Check logs for details."
+
+# IMPORTANT: Move this file to .github/workflows/sync.yml to activate it
