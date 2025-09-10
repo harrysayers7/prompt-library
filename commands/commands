@@ -1,0 +1,90 @@
+# Claude Desktop Commands Legend
+
+This file contains special commands that can be used with Claude Desktop to modify response formatting and behavior.
+
+## Formatting Commands
+
+### Code Display
+- `!pasta` = Show response in a single codeblock window
+- `!code` = Format response as code with syntax highlighting
+- `!raw` = Show response in plain text format without formatting
+
+### Response Style
+- `!brief` = Give a concise, short response
+- `!detailed` = Provide comprehensive, detailed response
+- `!list` = Format response as bulleted/numbered lists
+- `!prose` = Format response as flowing paragraphs (no lists)
+
+### Output Format
+- `!json` = Return response in JSON format
+- `!yaml` = Return response in YAML format
+- `!markdown` = Format response in clean markdown
+- `!table` = Present information in table format
+
+### Development Commands
+- `!mcp` = Focus on MCP-related context and solutions
+- `!debug` = Include debugging information and troubleshooting steps
+- `!deploy` = Provide deployment-ready code and instructions
+- `!test` = Include testing examples and validation steps
+
+### File Operations
+- `!artifact` = Create response as an artifact (for substantial content)
+- `!snippet` = Show as small code snippets only
+- `!template` = Provide as reusable template format
+
+### Analysis Commands
+- `!analyze` = Provide analytical breakdown of the topic
+- `!compare` = Show comparisons between options/approaches
+- `!pros-cons` = List advantages and disadvantages
+- `!steps` = Break down into step-by-step instructions
+
+### Context Commands
+- `!context` = Include relevant background context
+- `!examples` = Focus on providing examples
+- `!docs` = Format as documentation-style response
+- `!reference` = Create as reference material
+
+## Usage Examples
+
+```
+User: !pasta How do I create a FastMCP server?
+Claude: [Returns the entire FastMCP server code in a single code block]
+
+User: !brief !mcp What ports are available?
+Claude: [Short MCP-focused response about available ports 3002-3020]
+
+User: !json !deploy Configuration for new MCP service
+Claude: [Returns deployment config in JSON format]
+```
+
+## Combining Commands
+
+Commands can be combined for more specific formatting:
+- `!brief !list` = Short response in list format
+- `!detailed !code` = Comprehensive response with code examples
+- `!mcp !deploy !artifact` = MCP deployment guide as artifact
+
+## Custom Commands
+
+Add your own commands here as you develop patterns:
+- `!fastmcp` = Focus on FastMCP-specific implementations
+- `!ssh` = Include SSH tunnel setup in responses  
+- `!docker` = Focus on Docker/containerization aspects
+- `!troubleshoot` = Provide troubleshooting steps and diagnostics
+
+## Notes
+
+- Commands should be placed at the beginning of your message
+- Multiple commands can be used together (space-separated)
+- Commands are case-insensitive
+- If a command isn't recognized, Claude will respond normally
+- These are formatting hints, not strict requirements
+
+## Contributing
+
+When adding new commands:
+1. Use clear, memorable command names
+2. Start with `!` prefix
+3. Add description and example usage
+4. Test the command works as expected
+5. Update this legend file
