@@ -42,6 +42,9 @@ notion/
 ├── notion-dev-databases.md  # Database IDs for all Notion databases
 ├── README.md                # Documentation about Notion integration
 └── USAGE.md                 # Detailed usage instructions
+
+USAGE.md            # Comprehensive usage guide
+LLM-GUIDE.md        # Instructions for LLMs interacting with this repo
 ```
 
 ## Adding a New Prompt
@@ -98,6 +101,15 @@ response = requests.get(
 )
 prompts = response.json()
 ```
+
+### Using LLMs with This Repository
+
+If you're using an LLM (like Claude or GPT-4) to interact with this repository:
+
+1. LLMs can read, create, and modify prompts following our standard format
+2. See `LLM-GUIDE.md` for comprehensive instructions for LLMs
+3. Always remind LLMs to maintain proper frontmatter and file structure
+4. LLMs should remind you about sync requirements after making changes
 
 ## Notion Integration
 
@@ -165,6 +177,12 @@ python sync/validate.py
 3. Test locally before pushing
 4. One prompt per file
 5. Specify the target Notion database in frontmatter
+
+## Documentation
+
+- **Main Usage Guide**: See `USAGE.md` for comprehensive instructions
+- **Notion Integration**: See `notion/USAGE.md` for Notion-specific details
+- **LLM Interaction**: See `LLM-GUIDE.md` for instructions for LLMs
 
 ## Why This Design?
 
