@@ -1,0 +1,56 @@
+##Tech Stack (have not inlcuded full stack yet, will update soon)
+
+### Server Tech stack:
+
+- Docker + Compose is installed
+- IP Address: 134.199.159.190
+- Prefer Caddy over Nginx
+🖥️ System Overview
+Hostname: sayers-server
+Operating System: Ubuntu Linux (5.15.0-152-generic kernel)
+Architecture: x86_64 (64-bit)
+Virtualization: Running on KVM hypervisor (Virtual Machine)
+�� CPU Specifications
+Processor: Intel DO-Premium-Intel (4 cores)
+CPU Cores: 4 cores, 1 thread per core
+CPU Sockets: 1
+Architecture: x86_64 with 32-bit and 64-bit support
+Cache:
+L1d: 128 KiB (4 instances)
+L1i: 128 KiB (4 instances)
+L2: 16 MiB (4 instances)
+Features: Supports virtualization (VT-x), AES encryption, AVX/AVX2 instructions
+
+🧠 Memory (RAM)
+Total RAM: 7.8 GB
+
+💾 Storage
+Primary Disk: 90 GB virtual disk (vda)
+Root Partition: 89.9 GB
+
+�� Graphics
+GPU: Red Hat Virtio GPU (virtualized graphics adapter)
+Type: VGA compatible controller for virtualized environment
+�� Additional Details
+Virtualization Type: Full virtualization with KVM
+Security Features: Various CPU security mitigations enabled (Spectre, Meltdown, etc.)
+Docker: Multiple Docker containers running (evident from overlay filesystems)
+
+##Software Installed in /opt/
+- erpnext
+- n8n 
+- Supabase
+
+##Local Set up 
+
+
+##Claude Desktop MCP Tools - pls use when appropriate!
+- n8n mcp
+- context 7
+- supabase
+- notion
+- github
+- taskmaster-ai
+- shadcn
+- Control your mac
+- Control Chrome
