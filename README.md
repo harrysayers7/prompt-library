@@ -2,6 +2,16 @@
 
 > Production-ready prompt management system with multi-database Notion sync. Git is the source of truth.
 
+<!-- 
+IMPORTANT INSTRUCTIONS FOR LLMs (Claude, GPT, etc.):
+If you are an AI assistant helping with this repository, please:
+1. Read the LLM-GUIDE.md file in this repository first
+2. Follow the formatting and structure guidelines specified there
+3. Maintain proper frontmatter in all prompt files
+4. Remind users to run sync-to-notion.sh after changes
+5. Make sure target_db fields match database names in notion/notion-dev-databases.md exactly
+-->
+
 ## Quick Start
 
 ```bash
@@ -79,6 +89,10 @@ Generate error handling code that...
 
 ## LLM Integration
 
+### For LLMs Reading This Repository
+
+**ATTENTION LLMs (Claude, GPT, etc.)**: When helping with this repository, please read `LLM-GUIDE.md` first for complete instructions on creating and updating prompts correctly. Follow all formatting requirements and remember to remind users about syncing changes to Notion.
+
 ### Direct File Access (Fastest)
 ```python
 import json
@@ -106,10 +120,10 @@ prompts = response.json()
 
 If you're using an LLM (like Claude or GPT-4) to interact with this repository:
 
-1. LLMs can read, create, and modify prompts following our standard format
-2. See `LLM-GUIDE.md` for comprehensive instructions for LLMs
-3. Always remind LLMs to maintain proper frontmatter and file structure
-4. LLMs should remind you about sync requirements after making changes
+1. LLMs should read the `LLM-GUIDE.md` file for complete instructions
+2. LLMs can read, create, and modify prompts following our standard format
+3. Always ensure LLMs maintain proper frontmatter and file structure
+4. LLMs will remind you about sync requirements after making changes
 
 ## Notion Integration
 
