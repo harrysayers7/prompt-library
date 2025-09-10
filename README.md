@@ -1,6 +1,6 @@
 # Prompt Library
 
-> Production-ready prompt management system with Notion sync. Git is the source of truth.
+> Production-ready prompt management system with multi-database Notion sync. Git is the source of truth.
 
 ## Quick Start
 
@@ -14,10 +14,10 @@ pip install -r requirements.txt
 
 # Set up environment variables
 cp .env.example .env
-# Add your NOTION_API_KEY and NOTION_DATABASE_ID
+# Add your NOTION_API_KEY
 
-# Test local sync
-python sync/notion-sync.py
+# Test local sync to all Notion databases
+./sync-to-notion.sh
 ```
 
 ## Philosophy
@@ -37,14 +37,19 @@ prompts/
 ├── writing/         # Content generation
 ├── analysis/        # Data analysis & review
 └── _index.json     # Auto-generated for LLM consumption
+
+notion/
+├── notion-dev-databases.md  # Database IDs for all Notion databases
+├── README.md                # Documentation about Notion integration
+└── USAGE.md                 # Detailed usage instructions
 ```
 
 ## Adding a New Prompt
 
 1. Create a new `.md` file in the appropriate category folder
-2. Add frontmatter with metadata
+2. Add frontmatter with metadata (including target_db for Notion sync)
 3. Write your prompt
-4. Commit and push - GitHub Actions handles the rest
+4. Commit and push - GitHub Actions or local hooks handle the sync
 
 ### Example Prompt
 
@@ -59,6 +64,7 @@ tested_with: ["gpt-4", "claude-3"]
 performance: "high"
 use_when: "Building production APIs"
 avoid_when: "Quick prototypes"
+target_db: "Coding Knowledge Database"  # Which Notion DB to sync to
 ---
 
 # Context
@@ -93,42 +99,55 @@ response = requests.get(
 prompts = response.json()
 ```
 
-## Notion Setup
+## Notion Integration
 
-1. Create a Notion database with these properties:
-   - Name (title)
-   - Description (text)
-   - Category (select)
-   - Tags (multi-select)
-   - Version (text)
-   - Performance (select)
-   - Use When (text)
-   - Avoid When (text)
-   - Content (text)
-   - GitHub URL (url)
+The system now supports syncing to multiple Notion databases:
 
-2. Get your API key: https://www.notion.so/my-integrations
-3. Share the database with your integration
-4. Add credentials to GitHub Secrets:
-   - `NOTION_API_KEY`
-   - `NOTION_DATABASE_ID`
+1. **Database Configuration**: 
+   - All database IDs are stored in `notion/notion-dev-databases.md`
+   - Each prompt specifies which database to sync to using the `target_db` frontmatter field
+
+2. **Multiple Database Support**:
+   - Prompts can be directed to different databases based on their purpose
+   - Code prompts go to coding databases, tasks to project management, etc.
+
+3. **Usage Instructions**:
+   - See `notion/USAGE.md` for detailed instructions on using the Notion sync system
+   - See `notion/README.md` for information about the Notion integration
+
+4. **Setup Requirements**:
+   - Create a Notion integration: https://www.notion.so/my-integrations
+   - Share all databases with your integration
+   - Add your NOTION_API_KEY to .env or GitHub Secrets
 
 ## Maintenance
+
+### Sync to Notion
+```bash
+./sync-to-notion.sh
+```
 
 ### Update Index Manually
 ```bash
 python sync/generate-index.py
 ```
 
-### Force Notion Sync
-```bash
-python sync/notion-sync.py --force
-```
-
 ### Validate Prompts
 ```bash
 python sync/validate.py
 ```
+
+## Automation Options
+
+1. **Pre-commit Hook** (Local):
+   ```bash
+   cp scripts/pre-commit.sample .git/hooks/pre-commit
+   chmod +x .git/hooks/pre-commit
+   ```
+
+2. **GitHub Actions** (CI/CD):
+   - Set up a workflow to run the sync script on push
+   - See `notion/USAGE.md` for setup instructions
 
 ## Upgrade Path
 
@@ -145,6 +164,7 @@ python sync/validate.py
 2. Follow the frontmatter schema
 3. Test locally before pushing
 4. One prompt per file
+5. Specify the target Notion database in frontmatter
 
 ## Why This Design?
 
@@ -152,7 +172,8 @@ python sync/validate.py
 - **Fast LLM access**: Direct file reads, no API overhead
 - **Version control**: Git tracks everything properly
 - **Simple to maintain**: One Python script, clear flow
-- **Scales well**: Add folders/categories as needed
+- **Scales well**: Add folders/categories and databases as needed
+- **Flexible organization**: Sync different prompts to different Notion databases
 
 ---
 
