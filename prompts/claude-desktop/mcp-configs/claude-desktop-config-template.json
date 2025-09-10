@@ -1,0 +1,23 @@
+{
+  "mcpServers": {
+    "filesystem-fastmcp": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-sse-client",
+        "http://localhost:3001/sse"
+      ]
+    },
+    "example-service": {
+      "command": "npx",
+      "args": [
+        "@modelcontextprotocol/server-sse-client",
+        "http://localhost:3002/sse"
+      ]
+    }
+  },
+  "_notes": {
+    "ssh_tunnel": "Run: ssh -L 3001:localhost:3001 -L 3002:localhost:3002 root@134.199.159.190",
+    "location": "~/Library/Application Support/Claude/claude_desktop_config.json",
+    "ports": "Update port numbers based on actual service deployments"
+  }
+}
