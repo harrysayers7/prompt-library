@@ -1,0 +1,31 @@
+#!/bin/bash
+# Pre-commit hook to sync prompt library to Notion databases
+# Copy this file to .git/hooks/pre-commit and make it executable
+
+# Get the directory where the script is located
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# Go to the repository root
+cd "$DIR/../.."
+
+# Only run sync if changes are made to prompt files or Notion config
+PROMPT_CHANGES=$(git diff --cached --name-only | grep -E 'prompts/|notion/')
+if [ -n "$PROMPT_CHANGES" ]; then
+    echo "📝 Prompt or Notion config changes detected"
+    echo "🔄 Running Notion sync before commit..."
+    
+    # Run the sync script
+    ./sync-to-notion.sh
+    
+    # Check if the sync was successful
+    if [ $? -ne 0 ]; then
+        echo "❌ Notion sync failed. Fix errors before committing."
+        exit 1
+    fi
+    
+    echo "✅ Notion sync completed successfully."
+else
+    echo "ℹ️ No prompt or Notion config changes, skipping sync."
+fi
+
+# Continue with the commit
+exit 0
